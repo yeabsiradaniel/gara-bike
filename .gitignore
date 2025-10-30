@@ -1,0 +1,26 @@
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Python
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Node.js
+node_modules/
+
+# Flutter
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Other
+screenshots/*.rar

@@ -1,0 +1,262 @@
+[
+  {
+    "model": "rides.bike",
+    "pk": 1,
+    "fields": {
+      "qr_code": "a1b2c3d4-0001-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.010750",
+      "longitude": "38.762590",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 2,
+    "fields": {
+      "qr_code": "a1b2c3d4-0002-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.010590",
+      "longitude": "38.762780",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 3,
+    "fields": {
+      "qr_code": "a1b2c3d4-0003-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.004820",
+      "longitude": "38.767710",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 4,
+    "fields": {
+      "qr_code": "a1b2c3d4-0004-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.004690",
+      "longitude": "38.767550",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 5,
+    "fields": {
+      "qr_code": "a1b2c3d4-0005-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.993990",
+      "longitude": "38.774210",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 6,
+    "fields": {
+      "qr_code": "a1b2c3d4-0006-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.993750",
+      "longitude": "38.774430",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 7,
+    "fields": {
+      "qr_code": "a1b2c3d4-0007-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.991810",
+      "longitude": "38.781880",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 8,
+    "fields": {
+      "qr_code": "a1b2c3d4-0008-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.991630",
+      "longitude": "38.781680",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 9,
+    "fields": {
+      "qr_code": "a1b2c3d4-0009-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.990200",
+      "longitude": "38.785200",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 10,
+    "fields": {
+      "qr_code": "a1b2c3d4-0010-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.990050",
+      "longitude": "38.785450",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 11,
+    "fields": {
+      "qr_code": "a1b2c3d4-0011-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.987820",
+      "longitude": "38.790750",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 12,
+    "fields": {
+      "qr_code": "a1b2c3d4-0012-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.987660",
+      "longitude": "38.790990",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 13,
+    "fields": {
+      "qr_code": "a1b2c3d4-0013-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.994550",
+      "longitude": "38.795440",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 14,
+    "fields": {
+      "qr_code": "a1b2c3d4-0014-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.994390",
+      "longitude": "38.795680",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 15,
+    "fields": {
+      "qr_code": "a1b2c3d4-0015-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.002350",
+      "longitude": "38.799750",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 16,
+    "fields": {
+      "qr_code": "a1b2c3d4-0016-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.002190",
+      "longitude": "38.800000",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 17,
+    "fields": {
+      "qr_code": "a1b2c3d4-0017-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.008480",
+      "longitude": "38.803450",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 18,
+    "fields": {
+      "qr_code": "a1b2c3d4-0018-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.008280",
+      "longitude": "38.803700",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 19,
+    "fields": {
+      "qr_code": "a1b2c3d4-0019-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.019250",
+      "longitude": "38.801200",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  },
+  {
+    "model": "rides.bike",
+    "pk": 20,
+    "fields": {
+      "qr_code": "a1b2c3d4-0020-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.019050",
+      "longitude": "38.801450",
+      "battery_level": 100,
+      "reserved_by": null,
+      "reservation_expires_at": null
+    }
+  }
+]
