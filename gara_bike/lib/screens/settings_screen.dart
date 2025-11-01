@@ -7,6 +7,10 @@ import 'package:provider/provider.dart';
 import 'package:gara_bike/screens/edit_profile_screen.dart';
 import 'package:gara_bike/screens/favorite_locations_screen.dart';
 
+import 'package:gara_bike/l10n/app_localizations.dart';
+
+import 'package:gara_bike/providers/language_provider.dart';
+
 import '../providers/theme_provider.dart';
 // import 'package:gara_bike/screens/favorite_locations_screen.dart';
 
@@ -38,17 +42,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.settings, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListView(
         children: [
-          _buildSectionHeader('General'),
+          _buildSectionHeader(AppLocalizations.of(context)!.general),
           Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
               return SwitchListTile(
-                title: Text('Dark Mode', style: GoogleFonts.poppins()),
+                title: Text(AppLocalizations.of(context)!.darkMode, style: GoogleFonts.poppins()),
                 secondary: const Icon(Icons.dark_mode_outlined),
                 value: themeProvider.themeMode == ThemeMode.dark,
                 onChanged: (value) {
@@ -58,16 +62,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           _buildListTile(
-            title: 'Notifications',
+            title: AppLocalizations.of(context)!.notifications,
             leadingIcon: Icons.notifications_outlined,
             onTap: () {
-              // TODO: Implement Notifications Screen
             },
           ),
+          ListTile(
+            title: Text(AppLocalizations.of(context)!.language, style: GoogleFonts.poppins()),
+            leading: const Icon(Icons.language_outlined),
+            trailing: Consumer<LanguageProvider>(
+              builder: (context, languageProvider, child) {
+                return DropdownButton<Locale>(
+                  value: languageProvider.appLocale,
+                  onChanged: (Locale? newLocale) {
+                    if (newLocale != null) {
+                      languageProvider.changeLanguage(newLocale);
+                    }
+                  },
+                  items: [
+                    DropdownMenuItem(
+                      value: const Locale('en'),
+                      child: Text(AppLocalizations.of(context)!.english),
+                    ),
+                    DropdownMenuItem(
+                      value: const Locale('am'),
+                      child: Text(AppLocalizations.of(context)!.amharic),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
           
-          _buildSectionHeader('Account'),
+          _buildSectionHeader(AppLocalizations.of(context)!.account),
           _buildListTile(
-            title: 'Edit Profile',
+            title: AppLocalizations.of(context)!.editProfile,
             leadingIcon: Icons.person_outline,
             // --- UNCOMMENT THIS NAVIGATION ---
             onTap: () {
@@ -75,7 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           _buildListTile(
-            title: 'Favorite Locations',
+            title: AppLocalizations.of(context)!.favoriteLocations,
             leadingIcon: Icons.favorite_border,
             // --- UNCOMMENT THIS NAVIGATION ---
             onTap: () {
@@ -83,23 +112,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
 
-          _buildSectionHeader('About'),
+          _buildSectionHeader(AppLocalizations.of(context)!.about),
           _buildListTile(
-            title: 'Privacy Policy',
+            title: AppLocalizations.of(context)!.privacyPolicy,
             leadingIcon: Icons.privacy_tip_outlined,
             onTap: () {
               // TODO: Launch URL to Privacy Policy
             },
           ),
           _buildListTile(
-            title: 'Terms of Service',
+            title: AppLocalizations.of(context)!.termsOfService,
             leadingIcon: Icons.description_outlined,
             onTap: () {
               // TODO: Launch URL to Terms of Service
             },
           ),
           ListTile(
-            title: Text('App Version', style: GoogleFonts.poppins()),
+            title: Text(AppLocalizations.of(context)!.appVersion, style: GoogleFonts.poppins()),
             leading: const Icon(Icons.info_outline),
             trailing: Text(_appVersion, style: GoogleFonts.poppins(color: Colors.grey[600])),
           ),

@@ -17,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:gara_bike/providers/statistics_provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// Screen that displays the user's ride statistics with animated cards.
@@ -45,7 +46,7 @@ class _MyStatisticsScreenState extends State<MyStatisticsScreen> {
     // Main UI: AppBar and statistics cards.
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Statistics', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.myStatistics, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -57,11 +58,11 @@ class _MyStatisticsScreenState extends State<MyStatisticsScreen> {
           }
           // Show error message if fetching failed.
           if (provider.status == StatisticsStatus.error) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return Center(child: Text("${AppLocalizations.of(context)!.error} ${provider.errorMessage!}"));
           }
           // Show message if no stats are available.
           if (provider.stats == null) {
-            return const Center(child: Text('No statistics found.'));
+            return Center(child: Text(AppLocalizations.of(context)!.noStatisticsFound));
           }
 
           final stats = provider.stats!;
@@ -73,29 +74,29 @@ class _MyStatisticsScreenState extends State<MyStatisticsScreen> {
               children: [
                 _buildStatCard(
                   lottieAsset: 'assets/animations/timer.json',
-                  label: 'Total Duration',
-                  value: stats['duration'] ?? '0 mins',
+                  label: AppLocalizations.of(context)!.totalDuration,
+                  value: stats['duration'] ?? AppLocalizations.of(context)!.zeroMins,
                   color: Colors.blue,
                 ),
                 const SizedBox(height: 16),
                 _buildStatCard(
                   lottieAsset: 'assets/animations/route.json',
-                  label: 'Total Distance',
-                  value: stats['distance'] ?? '0 m',
+                  label: AppLocalizations.of(context)!.totalDistance,
+                  value: stats['distance'] ?? AppLocalizations.of(context)!.zeroMeters,
                   color: Colors.green,
                 ),
                 const SizedBox(height: 16),
                 _buildStatCard(
                   lottieAsset: 'assets/animations/calories.json',
-                  label: 'Calories Burned',
-                  value: stats['calories'] ?? '0 cal',
+                  label: AppLocalizations.of(context)!.caloriesBurned,
+                  value: stats['calories'] ?? AppLocalizations.of(context)!.zeroCalories,
                   color: Colors.orange,
                 ),
                 const SizedBox(height: 16),
                 _buildStatCard(
                   lottieAsset: 'assets/animations/carbon.json',
-                  label: 'Carbon Saved',
-                  value: '${stats['carbon'] ?? '0'}',
+                  label: AppLocalizations.of(context)!.carbonSaved,
+                  value: '${stats['carbon'] ?? AppLocalizations.of(context)!.zero}',
                   color: Colors.grey,
                 ),
               ],

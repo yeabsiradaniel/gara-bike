@@ -14,6 +14,7 @@ import 'package:gara_bike/providers/wallet_provider.dart';
 import 'package:gara_bike/screens/top_up_screen.dart';
 import 'package:gara_bike/screens/purchase_pass_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class WalletScreen extends StatefulWidget {
@@ -38,7 +39,7 @@ class _WalletScreenState extends State<WalletScreen> {
     return Scaffold(
       appBar: AppBar(
         // App bar with title
-        title: Text('My Wallet', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.myWallet, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -50,11 +51,11 @@ class _WalletScreenState extends State<WalletScreen> {
           }
           // Show error message if wallet fetch fails
           if (provider.status == WalletStatus.error) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return Center(child: Text(AppLocalizations.of(context)!.error(provider.errorMessage!)));
           }
           // Show message if no wallet details found
           if (provider.wallet == null) {
-            return const Center(child: Text('No wallet details found.'));
+            return Center(child: Text(AppLocalizations.of(context)!.noWalletDetailsFound));
           }
 
           final wallet = provider.wallet!;
@@ -83,9 +84,9 @@ class _WalletScreenState extends State<WalletScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Current Balance', style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16)),
+            Text(AppLocalizations.of(context)!.currentBalance, style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16)),
             const SizedBox(height: 8),
-            Text('ETB ${balance.toStringAsFixed(2)}', style: GoogleFonts.poppins(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.etb + ' ' + balance.toStringAsFixed(2), style: GoogleFonts.poppins(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold)),
             const SizedBox(height: 24),
             Row(
               children: [
@@ -93,7 +94,7 @@ class _WalletScreenState extends State<WalletScreen> {
                 Expanded(
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.add_card, color: Colors.white),
-                    label: Text('Top Up', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
+                    label: Text(AppLocalizations.of(context)!.topUp, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) => const TopUpScreen()));
                     },
@@ -108,7 +109,7 @@ class _WalletScreenState extends State<WalletScreen> {
                 Expanded(
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.shopping_bag_outlined, color: Colors.white),
-                    label: Text('Buy Pass', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
+                    label: Text(AppLocalizations.of(context)!.buyPass, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PurchasePassScreen())),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.white),

@@ -15,6 +15,7 @@ import 'package:gara_bike/models/parking_zone_model.dart';
 import 'package:gara_bike/models/bike_model.dart';
 import 'package:gara_bike/api/api_service.dart';
 import 'package:gara_bike/screens/reservation_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class ParkingZoneMapScreen extends StatefulWidget {
@@ -159,7 +160,7 @@ class _ParkingZoneMapScreenState extends State<ParkingZoneMapScreen> with Ticker
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${_bikesInZone.length} Bikes Available',
+                      AppLocalizations.of(context)!.bikesAvailable(_bikesInZone.length),
                       style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -171,8 +172,8 @@ class _ParkingZoneMapScreenState extends State<ParkingZoneMapScreen> with Ticker
                 const Center(child: CircularProgressIndicator())
               else ..._bikesInZone.map((bike) => ListTile(
                 leading: Icon(Icons.battery_charging_full, color: bike.batteryLevel > 20 ? Colors.green : Colors.red),
-                title: Text('Bike #${bike.id}', style: GoogleFonts.poppins()),
-                subtitle: Text('${bike.batteryLevel}% Battery'),
+                title: Text(AppLocalizations.of(context)!.bike(bike.id.toString()), style: GoogleFonts.poppins()),
+                subtitle: Text(AppLocalizations.of(context)!.battery(bike.batteryLevel)),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ReservationScreen(bike: bike))),
               )).toList(),

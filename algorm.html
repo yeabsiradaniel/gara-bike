@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gregorian → Ethiopian Date Converter</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans',Arial;line-height:1.45}
+    body{display:flex;min-height:100vh;align-items:center;justify-content:center;background:#f6f8fa;color:#0b1220;padding:24px}
+    .card{width:100%;max-width:760px;background:white;border-radius:12px;padding:22px;box-shadow:0 8px 30px rgba(11,18,32,0.08)}
+    h1{margin:0 0 8px;font-size:20px}
+    p.lead{margin:0 0 18px;color:#374151}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    label{font-size:13px;color:#374151}
+    input[type=date]{padding:10px;border-radius:8px;border:1px solid #e6e9ef}
+    .result{margin-top:16px;padding:14px;border-radius:8px;background:#f8fafc;border:1px dashed #e6eef7}
+    .amharic{font-size:20px;margin-top:6px}
+    .small{font-size:13px;color:#6b7280}
+    .example{margin-top:12px;padding:10px;border-radius:8px;background:#fff7ed;border:1px solid #ffedd5}
+    button{background:#0f1724;color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .flex{display:flex;gap:10px;align-items:center}
+    footer{margin-top:14px;font-size:13px;color:#6b7280}
+    .kbd{background:#eef2ff;padding:4px 8px;border-radius:6px;font-weight:600}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Gregorian → Ethiopian Date Converter</h1>
+    <p class="lead">Pick a Gregorian date and get the Ethiopian calendar equivalent (ገደብ፡ 13 months — Meskerem to Pagume).</p>
+
+    <div class="row">
+      <div>
+        <label for="gdate">Gregorian date</label><br>
+        <input id="gdate" type="date" />
+      </div>
+      <div class="flex" style="margin-left:auto">
+        <button id="convertBtn">Convert</button>
+        <button id="todayBtn" title="Use today's date">Today</button>
+      </div>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="small">Result will appear here after conversion.</div>
+    </div>
+
+    <div class="example">
+      Example: <strong>Nov 2, 2025</strong> → <span class="kbd">ጥቅምት 23, 2018</span>
+    </div>
+
+    <footer>
+      Month names (English — Amharic): Meskerem(መስከረም), Tikimt(ጥቅምት), Hidar(ህዳር), Tahsas(ታሕሳስ), Tir(ጥር), Yekatit(የካቲት), Megabit(መጋቢት), Miazia(ሚያዝያ), Genbot(ግንቦት), Sene(ሰኔ), Hamle(ሐምሌ), Nehasse(ነሐሴ), Pagume(ጳጉሜን).
+    </footer>
+
+  </main>
+
+  <script>
+    // Ethiopian month names (Amharic + English)
+    const ethiopianMonths = [
+      'መስከረም (Meskerem)',
+      'ጥቅምት (Tikimt)',
+      'ህዳር (Hidar)',
+      'ታሕሳስ (Tahsas)',
+      'ጥር (Tir)',
+      'የካቲት (Yekatit)',
+      'መጋቢት (Megabit)',
+      'ሚያዝያ (Miazia)',
+      'ግንቦት (Genbot)',
+      'ሰኔ (Sene)',
+      'ሐምሌ (Hamle)',
+      'ነሐሴ (Nehasse)',
+      'ጳጉሜን (Pagume)'
+    ];
+
+    function isGregorianLeap(y){
+      return (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0));
+    }
+
+    // For a Gregorian year Y, Meskerem 1 (Ethiopian new year) is on
+    // September 11, except in the Gregorian year that precedes a leap year
+    // (i.e., if (Y + 1) is a leap year) when it falls on September 12.
+    function newYearDayForGregorianYear(Y){
+      return isGregorianLeap(Y + 1) ? 12 : 11;
+    }
+
+    function gregorianToEthiopian(gy, gm, gd){
+      // create JS Date objects (month is 1-based in input)
+      const input = new Date(gy, gm - 1, gd);
+
+      // decide which Ethiopian year the date belongs to
+      const nyDayThisYear = newYearDayForGregorianYear(gy);
+      let ey, newYearGregorian;
+
+      if (gm > 9 || (gm === 9 && gd >= nyDayThisYear)){
+        ey = gy - 7;
+        newYearGregorian = new Date(gy, 8, nyDayThisYear); // monthIndex 8 = Sept
+      } else {
+        ey = gy - 8;
+        const prev = gy - 1;
+        newYearGregorian = new Date(prev, 8, newYearDayForGregorianYear(prev));
+      }
+
+      // difference in days
+      const msPerDay = 24 * 60 * 60 * 1000;
+      const delta = Math.floor((input - newYearGregorian) / msPerDay);
+      // Ethiopian months are 30 days each, 13th month Pagume has 5 or 6 days
+      const monthIndex = Math.floor(delta / 30); // 0-based
+      const day = (delta % 30) + 1;
+
+      // monthIndex in 0..12 -> convert to 1..13
+      const em = monthIndex + 1;
+
+      return { year: ey, month: em, day };
+    }
+
+    function formatEthiopic(dateObj){
+      if (!dateObj) return '';
+      const mIndex = Math.max(0, Math.min(12, dateObj.month - 1));
+      return `${ethiopianMonths[mIndex].split(' ')[0]} ${dateObj.day}, ${dateObj.year}`;
+    }
+
+    // DOM
+    const gdate = document.getElementById('gdate');
+    const result = document.getElementById('result');
+    const convertBtn = document.getElementById('convertBtn');
+    const todayBtn = document.getElementById('todayBtn');
+
+    function showResult(text){
+      result.innerHTML = `<div class="small">${text}</div>`;
+    }
+
+    function convertFromInput(){
+      if (!gdate.value){ showResult('Please pick a Gregorian date.'); return; }
+      const [gy, gm, gd] = gdate.value.split('-').map(n=>parseInt(n,10));
+      const eth = gregorianToEthiopian(gy, gm, gd);
+      const amharic = formatEthiopic(eth);
+      showResult(`<div><strong>${amharic}</strong></div><div class="amharic">${getAmharicMonthOnly(eth.month)} ${eth.day}, ${eth.year}</div>`);
+    }
+
+    function getAmharicMonthOnly(month){
+      const m = ethiopianMonths[Math.max(0, Math.min(12, month - 1))];
+      // return only Amharic script if present before a space
+      return m.split(' ')[0];
+    }
+
+    convertBtn.addEventListener('click', convertFromInput);
+    todayBtn.addEventListener('click', ()=>{
+      const d = new Date();
+      const y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+      // set input to today's date in yyyy-mm-dd
+      const pad = n=>n.toString().padStart(2,'0');
+      gdate.value = `${y}-${pad(m)}-${pad(day)}`;
+      convertFromInput();
+    });
+
+    // quick convenience: convert when user presses Enter on date
+    gdate.addEventListener('keydown', (e)=>{ if (e.key==='Enter') convertFromInput(); });
+
+    // Pre-fill with example date from your message
+    (function(){
+      // Nov 2, 2025 example
+      gdate.value = '2025-11-02';
+      convertFromInput();
+    })();
+
+  </script>
+</body>
+</html>

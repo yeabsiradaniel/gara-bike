@@ -30,48 +30,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # For making API calls to our Django backend
   http: ^1.2.1
-
-  # For simple and effective state management
-  provider: ^6.1.2
-
-  # For securely storing the user's auth token
-  flutter_secure_storage: ^9.2.2
-
-  # For getting the user's GPS location
-  geolocator: ^12.0.0
-
-  # For beautiful fonts that match the PDF's modern UI
   google_fonts: ^6.2.1
-
-  # The modern and stable QR/barcode scanner
-  mobile_scanner: ^5.1.1
-
-  # For animations, like on our splash screen
-  lottie: ^3.1.2
-
-  # For rendering SVG images like your logo
-  flutter_svg: ^2.0.10+1
-
-  # For map display (OpenStreetMap)
+  provider: ^6.1.2
   flutter_map: ^6.1.0
-
-  # For advanced map features like polylines for navigation
   latlong2: ^0.9.1
-
-  share_plus: ^11.0.0
-
-  package_info_plus: ^8.3.0
-
-  shared_preferences: ^2.2.3
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  geolocator: ^11.0.0
+  weather: ^3.1.1
+  lottie: ^3.1.0
+  shared_preferences: ^2.2.2
+  mobile_scanner: ^5.1.0
+  share_plus: ^9.0.0
+  package_info_plus: ^7.0.0
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  ethiopian_calendar_plus: ^1.0.0
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
+  flutter_gen_runner:
   flutter_test:
     sdk: flutter
 
@@ -81,6 +59,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  build_runner: ^2.10.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -91,6 +70,7 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+  generate: true
   uses-material-design: true
   assets:
     - assets/images/

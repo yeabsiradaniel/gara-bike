@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/screens/auth/login_screen.dart';
 import 'package:gara_bike/screens/auth/register_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// The welcome screen for the app, showing logo, greeting, and navigation to register or log in.
@@ -42,14 +43,14 @@ class WelcomeScreen extends StatelessWidget {
               const Spacer(),
               // Welcome title
               Text(
-                'Welcome to Gara Bike',
+                AppLocalizations.of(context)!.welcomeToGaraBike,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
               // Subtitle
               Text(
-                'The future of urban mobility in Addis Ababa. Tap to get started.',
+                AppLocalizations.of(context)!.theFutureOfUrbanMobility,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
               ),
@@ -62,17 +63,17 @@ class WelcomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: Text('Get Started', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+                child: Text(AppLocalizations.of(context)!.getStarted, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
               ),
               const SizedBox(height: 16),
               // Login prompt and button
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Already have an account?', style: GoogleFonts.poppins(fontSize: 14)),
+                  Text(AppLocalizations.of(context)!.alreadyHaveAnAccount, style: GoogleFonts.poppins(fontSize: 14)),
                   TextButton(
                     onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (c) => const LoginScreen())),
-                    child: Text('Log In', style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.amber[800])),
+                    child: Text(AppLocalizations.of(context)!.logIn, style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.amber[800])),
                   ),
                 ],
               ),

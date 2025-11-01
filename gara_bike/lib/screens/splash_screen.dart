@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gara_bike/main.dart'; // To access AuthWrapper
 import 'package:gara_bike/screens/onboarding_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -70,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 20),
             // App name
             Text(
-              'Gara Bike',
+              AppLocalizations.of(context)!.garaBike,
               style: GoogleFonts.poppins(
                 fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white,
               ),

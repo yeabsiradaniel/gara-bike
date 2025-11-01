@@ -8,6 +8,7 @@ import 'package:gara_bike/models/user_model.dart';
 import 'package:gara_bike/screens/set_location_screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class FavoriteLocationsScreen extends StatelessWidget {
   const FavoriteLocationsScreen({super.key});
@@ -67,7 +68,7 @@ class FavoriteLocationsScreen extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Favorite Locations', style: GoogleFonts.poppins()),
+            title: Text(AppLocalizations.of(context)!.favoriteLocations, style: GoogleFonts.poppins()),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
@@ -100,7 +101,7 @@ class FavoriteLocationsScreen extends StatelessWidget {
     required String type,
     required String? name,
   }) {
-    final title = type == 'home' ? 'Home' : 'Work';
+    final title = type == 'home' ? AppLocalizations.of(context)!.home : AppLocalizations.of(context)!.work;
     final hasLocation = name != null && name.isNotEmpty;
 
     return Card(
@@ -110,7 +111,7 @@ class FavoriteLocationsScreen extends StatelessWidget {
         leading: Icon(icon, size: 28),
         title: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
         subtitle: Text(
-          hasLocation ? name : 'Not set',
+          hasLocation ? name : AppLocalizations.of(context)!.notSet,
           style: GoogleFonts.poppins(color: hasLocation ? null : Colors.grey[600]),
         ),
         trailing: hasLocation
@@ -123,8 +124,8 @@ class FavoriteLocationsScreen extends StatelessWidget {
                   }
                 },
                 itemBuilder: (context) => [
-                  const PopupMenuItem(value: 'edit', child: Text('Edit')),
-                  const PopupMenuItem(value: 'clear', child: Text('Clear')),
+                  PopupMenuItem(value: 'edit', child: Text(AppLocalizations.of(context)!.edit)),
+                  PopupMenuItem(value: 'clear', child: Text(AppLocalizations.of(context)!.clear)),
                 ],
               )
             : null,

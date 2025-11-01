@@ -13,6 +13,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/api/api_service.dart'; // Directly use ApiService for simplicity
 import 'package:gara_bike/models/parking_zone_model.dart';
 import 'package:gara_bike/widgets/search_result_tile.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -60,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
       final results = await _apiService.searchParkingZones(query);
       setState(() => _results = results);
     } catch (e) {
-      print("Search failed: $e");
+      print(AppLocalizations.of(context)!.searchFailed(e.toString()));
     } finally {
       setState(() => _isLoading = false);
     }
@@ -81,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
         title: TextField(
           controller: _searchController,
           autofocus: true,
-          decoration: InputDecoration(hintText: 'Search for a parking zone...'),
+          decoration: InputDecoration(hintText: AppLocalizations.of(context)!.searchForAParkingZone),
         ),
       ),
       body: _isLoading

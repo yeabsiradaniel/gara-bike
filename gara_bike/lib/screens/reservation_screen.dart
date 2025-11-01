@@ -18,6 +18,7 @@ import 'package:gara_bike/models/bike_model.dart';
 import 'package:gara_bike/providers/bike_provider.dart';
 import 'package:gara_bike/api/api_service.dart';
 import 'package:gara_bike/screens/qr_scan_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class ReservationScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?.toString() ?? 'Reservation failed.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?.toString() ?? AppLocalizations.of(context)!.reservationFailed), backgroundColor: Colors.red),
         );
       }
     }
@@ -147,13 +148,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
     if (mounted) {
       if (response['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Reservation cancelled. Fee charged: ${response['data']['fee_charged']} ETB'), backgroundColor: Colors.orange)
+            SnackBar(content: Text(AppLocalizations.of(context)!.reservationCancelledFeeCharged(response['data']['fee_charged'])), backgroundColor: Colors.orange)
         );
         Navigator.of(context).popUntil((route) => route.isFirst);
       } else {
         setState(() => _isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?.toString() ?? 'Cancellation failed.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?.toString() ?? AppLocalizations.of(context)!.cancellationFailed), backgroundColor: Colors.red),
         );
       }
     }
@@ -170,7 +171,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       } else {
         timer.cancel();
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Reservation expired!'), backgroundColor: Colors.red));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.reservationExpired), backgroundColor: Colors.red));
           Provider.of<BikeProvider>(context, listen: false).fetchActiveReservation();
           Navigator.of(context).pop();
         }
@@ -192,7 +193,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     return Scaffold(
       appBar: AppBar(
         // App bar with bike ID
-        title: Text('Reserve Bike #${widget.bike.id}', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.reserveBike(widget.bike.id.toString()), style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -264,7 +265,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Reserve This Bike', style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(AppLocalizations.of(context)!.reserveThisBike, style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold)),
         const SizedBox(height: 20),
         // Dropdown for selecting reservation duration
         Container(
@@ -275,7 +276,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               value: _selectedDuration,
               isExpanded: true,
               icon: const Icon(Icons.timer_outlined),
-              items: [5, 10, 15, 20, 25, 30].map((int value) => DropdownMenuItem<int>(value: value, child: Text('$value minutes', style: GoogleFonts.poppins(fontSize: 16)))).toList(),
+              items: [5, 10, 15, 20, 25, 30].map((int value) => DropdownMenuItem<int>(value: value, child: Text(AppLocalizations.of(context)!.minutes(value), style: GoogleFonts.poppins(fontSize: 16)))).toList(),
               onChanged: (newValue) {
                 if (newValue != null) setState(() => _selectedDuration = newValue);
               },
@@ -287,7 +288,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
         ElevatedButton(
           onPressed: _confirmReservation,
           style: ElevatedButton.styleFrom(backgroundColor: Colors.green[800], padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-          child: Text('Confirm & Reserve', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+          child: Text(AppLocalizations.of(context)!.confirmAndReserve, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
         ),
       ],
     );
@@ -300,7 +301,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       key: const ValueKey('countdownView'),
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Bike is reserved! Time remaining:', style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700])),
+        Text(AppLocalizations.of(context)!.bikeIsReservedTimeRemaining, style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700])),
         const SizedBox(height: 8),
         // Countdown timer
         Text(_countdownText, style: GoogleFonts.robotoMono(fontSize: 40, fontWeight: FontWeight.bold)),
@@ -308,13 +309,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
         // Button to scan QR code when arrived
         ElevatedButton.icon(
           icon: const Icon(Icons.qr_code_scanner, color: Colors.white),
-          label: Text('I\'ve Arrived, Scan QR', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+          label: Text(AppLocalizations.of(context)!.iveArrivedScanQr, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
           onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const QRScanScreen())),
           style: ElevatedButton.styleFrom(backgroundColor: Colors.green[600], padding: const EdgeInsets.symmetric(vertical: 16), minimumSize: const Size(double.infinity, 50), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
         ),
         const SizedBox(height: 8),
         // Button to cancel reservation
-        TextButton(onPressed: _cancelReservation, child: Text('Cancel Reservation', style: GoogleFonts.poppins(color: Colors.red[700], fontWeight: FontWeight.w500))),
+        TextButton(onPressed: _cancelReservation, child: Text(AppLocalizations.of(context)!.cancelReservation, style: GoogleFonts.poppins(color: Colors.red[700], fontWeight: FontWeight.w500))),
       ],
     );
   }

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:gara_bike/providers/auth_provider.dart';
 import 'package:gara_bike/widgets/custom_text_field.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -43,12 +44,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if (mounted) {
       if (response['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully!'), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.profileUpdatedSuccessfully), backgroundColor: Colors.green),
         );
         Navigator.of(context).pop();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?['detail'] ?? 'Failed to update profile.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?['detail'] ?? AppLocalizations.of(context)!.failedToUpdateProfile), backgroundColor: Colors.red),
         );
       }
     }
@@ -67,7 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.editProfile, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -79,20 +80,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // Read-only email and NID fields
-              _buildReadOnlyField(label: 'Email Address', value: user?.email ?? '...'),
+              _buildReadOnlyField(label: AppLocalizations.of(context)!.emailAddress, value: user?.email ?? '...'),
               const SizedBox(height: 24),
-              _buildReadOnlyField(label: 'NID / FAN', value: user?.nid ?? '...'),
+              _buildReadOnlyField(label: AppLocalizations.of(context)!.nidFan, value: user?.nid ?? '...'),
               const Divider(height: 48),
 
               // Editable fields
               CustomTextField(
                 controller: _usernameController,
-                labelText: 'Username',
+                labelText: AppLocalizations.of(context)!.username,
               ),
               const SizedBox(height: 24),
               CustomTextField(
                 controller: _phoneController,
-                labelText: 'Phone Number',
+                labelText: AppLocalizations.of(context)!.phoneNumber,
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 40),
@@ -105,7 +106,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: Text('Save Changes', style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
+                child: Text(AppLocalizations.of(context)!.saveChanges, style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
               ),
             ],
           ),

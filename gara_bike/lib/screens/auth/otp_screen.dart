@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/providers/auth_provider.dart';
 import 'package:gara_bike/screens/auth/login_screen.dart'; // To navigate to login after verification
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// Screen for OTP verification after registration.
@@ -57,8 +58,8 @@ class _OTPScreenState extends State<OTPScreen> {
       if (response['success']) {
         // Show success message and navigate to login screen.
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Account verified! Please log in to continue.'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.accountVerifiedPleaseLogInToContinue),
             backgroundColor: Colors.green,
           ),
         );
@@ -70,7 +71,7 @@ class _OTPScreenState extends State<OTPScreen> {
         // Show error message if verification failed.
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response['error']?.toString() ?? 'Verification failed.'),
+            content: Text(response['error']?.toString() ?? AppLocalizations.of(context)!.verificationFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -92,7 +93,7 @@ class _OTPScreenState extends State<OTPScreen> {
     // Main UI: OTP input form, submit button, and resend prompt.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verification', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.verification, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -105,7 +106,7 @@ class _OTPScreenState extends State<OTPScreen> {
             children: [
               // Title
               Text(
-                'Enter Your Code',
+                AppLocalizations.of(context)!.enterYourCode,
                 style: GoogleFonts.poppins(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -114,7 +115,7 @@ class _OTPScreenState extends State<OTPScreen> {
               const SizedBox(height: 8),
               // Subtitle
               Text(
-                'A 4-digit code has been sent to your phone.',
+                AppLocalizations.of(context)!.a4DigitCodeHasBeenSentToYourPhone,
                 style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 48),
@@ -127,13 +128,13 @@ class _OTPScreenState extends State<OTPScreen> {
                 maxLength: 4,
                 validator: (value) {
                   if (value == null || value.length < 4) {
-                    return 'Please enter the 4-digit code';
+                    return AppLocalizations.of(context)!.pleaseEnterThe4DigitCode;
                   }
                   return null;
                 },
                 decoration: InputDecoration(
                   counterText: "", // Hides the counter
-                  labelText: 'Verification Code',
+                  labelText: AppLocalizations.of(context)!.verificationCode,
                   labelStyle: GoogleFonts.poppins(),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -154,7 +155,7 @@ class _OTPScreenState extends State<OTPScreen> {
                         ),
                       ),
                       child: Text(
-                        'Verify',
+                        AppLocalizations.of(context)!.verify,
                         style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -167,7 +168,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   // TODO: Implement resend OTP logic
                 },
                 child: Text(
-                  "Didn't receive SMS?",
+                  AppLocalizations.of(context)!.didntReceiveSms,
                   style: GoogleFonts.poppins(color: Colors.grey[600]),
                 ),
               ),

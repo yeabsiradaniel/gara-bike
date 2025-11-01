@@ -17,6 +17,7 @@ import 'package:gara_bike/screens/my_statistics_screen.dart';
 import 'package:gara_bike/screens/invite_friends_screen.dart'; // Import the new screen
 import 'package:gara_bike/screens/support_screen.dart'; // Import the new screen
 import 'package:gara_bike/screens/settings_screen.dart'; // Import the new screen
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class AppDrawer extends StatelessWidget {
@@ -35,7 +36,7 @@ class AppDrawer extends StatelessWidget {
           // Drawer header with user info
           UserAccountsDrawerHeader(
             accountName: Text(
-              user?.capitalizedUsername ?? 'Gara Rider',
+              user?.capitalizedUsername ?? AppLocalizations.of(context)!.garaRider,
               style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             accountEmail: Text(
@@ -54,8 +55,8 @@ class AppDrawer extends StatelessWidget {
               final balance = walletProvider.wallet?.balance.toStringAsFixed(2) ?? '...';
               return _buildDrawerItem(
                 icon: Icons.account_balance_wallet_outlined,
-                title: 'My Wallet',
-                subtitle: 'ETB $balance',
+                title: AppLocalizations.of(context)!.myWallet,
+                subtitle: '${AppLocalizations.of(context)!.etb} $balance',
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const WalletScreen()));
@@ -66,7 +67,7 @@ class AppDrawer extends StatelessWidget {
           // Statistics tile
           _buildDrawerItem(
             icon: Icons.bar_chart_outlined,
-            title: 'My Statistics',
+            title: AppLocalizations.of(context)!.myStatistics,
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (_) => const MyStatisticsScreen()));
@@ -75,7 +76,7 @@ class AppDrawer extends StatelessWidget {
           // Invite friends tile
           _buildDrawerItem(
             icon: Icons.people_outline,
-            title: 'Invite Friends',
+            title: AppLocalizations.of(context)!.inviteFriends,
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (_) => const InviteFriendsScreen()));
@@ -84,7 +85,7 @@ class AppDrawer extends StatelessWidget {
           // --- UPDATED THIS TILE ---
           _buildDrawerItem(
             icon: Icons.support_agent_outlined,
-            title: 'Support',
+            title: AppLocalizations.of(context)!.support,
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportScreen()));
@@ -94,7 +95,7 @@ class AppDrawer extends StatelessWidget {
           // --- UPDATED THIS TILE ---
           _buildDrawerItem(
             icon: Icons.settings_outlined,
-            title: 'Settings',
+            title: AppLocalizations.of(context)!.settings,
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
@@ -103,7 +104,7 @@ class AppDrawer extends StatelessWidget {
           // Logout tile
           _buildDrawerItem(
             icon: Icons.logout,
-            title: 'Log Out',
+            title: AppLocalizations.of(context)!.logOut,
             onTap: () async {
               await Provider.of<AuthProvider>(context, listen: false).logout();
               Navigator.of(context).pushAndRemoveUntil(

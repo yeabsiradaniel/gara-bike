@@ -19,6 +19,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:gara_bike/providers/auth_provider.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// Screen that allows the user to view and share their invitation/referral code.
@@ -43,8 +44,8 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
 
   /// Shares the referral code using the device's share sheet.
   void _shareCode(String code) {
-    final shareText = "Join me on Gara Bike! It's a great way to get around the city. Use my invitation code to get started: $code";
-    Share.share(shareText, subject: 'Gara Bike Invitation');
+    final shareText = AppLocalizations.of(context)!.joinMeOnGaraBike(code);
+    Share.share(shareText, subject: AppLocalizations.of(context)!.garaBikeInvitation);
   }
 
 
@@ -53,7 +54,7 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
     // Main UI: AppBar, Lottie animation, referral code display, and share button.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Invite Friends', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.inviteFriends, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -73,7 +74,7 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
             const SizedBox(height: 24),
             // Title for the invitation code section
             Text(
-              'Your Invitation Code',
+              AppLocalizations.of(context)!.yourInvitationCode,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
             ),
@@ -108,7 +109,7 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
                         onPressed: () {
                           Clipboard.setData(ClipboardData(text: auth.referralCode!));
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Code copied to clipboard!')),
+                            SnackBar(content: Text(AppLocalizations.of(context)!.codeCopiedToClipboard)),
                           );
                         },
                       ),
@@ -123,7 +124,7 @@ class _InviteFriendsScreenState extends State<InviteFriendsScreen> {
               builder: (context, auth, child) {
                 return ElevatedButton.icon(
                   icon: const Icon(Icons.share, color: Colors.white),
-                  label: Text('Share Code', style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
+                  label: Text(AppLocalizations.of(context)!.shareCode, style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
                   onPressed: auth.referralCode == null ? null : () => _shareCode(auth.referralCode!),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green[700],

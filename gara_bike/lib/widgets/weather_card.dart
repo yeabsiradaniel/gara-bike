@@ -15,6 +15,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:gara_bike/providers/weather_provider.dart';
+import 'package:gara_bike/util/ethiopian_calendar.dart';
+
+import 'package:gara_bike/l10n/app_localizations.dart';
+
+import 'package:gara_bike/util/translations.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({super.key});
@@ -35,16 +40,30 @@ class WeatherCard extends StatelessWidget {
             break;
           case WeatherStatus.error:
             // Show error message if weather could not be loaded
-            content = Center(child: Text('Could not load weather.', style: GoogleFonts.poppins(color: Colors.white)));
+            content = Center(child: Text(AppLocalizations.of(context)!.couldNotLoadWeather, style: GoogleFonts.poppins(color: Colors.white)));
             break;
           case WeatherStatus.loaded:
             // Weather loaded successfully, extract data
             final weather = provider.weather!;
             final temp = weather.temperature.round().toString(); // Rounded temperature
-            final condition = weather.condition; // Weather condition (e.g., Sunny)
-            final location = weather.locationName; // Location name
-            // Format date as '4 Jul, Friday'
-            final date = '${DateTime.now().day} ${_getMonthName(DateTime.now().month)}, ${_getWeekdayName(DateTime.now().weekday)}';
+            final locale = Localizations.localeOf(context);
+
+            String condition = weather.condition;
+            String location = weather.locationName;
+
+            if (locale.languageCode == 'am') {
+              condition = weatherConditions[condition] ?? condition;
+              location = locations[location] ?? location;
+            }
+
+            String date;
+            if (locale.languageCode == 'am') {
+              final ethiopianDate = EthiopianCalendar.fromGregorian(DateTime.now());
+              date = '${ethiopianDate.day} ${ethiopianDate.monthName}, ${ethiopianDate.year}';
+            } else {
+              date = '${DateTime.now().day} ${_getMonthName(context, DateTime.now().month)}, ${_getWeekdayName(context, DateTime.now().weekday)}';
+            }
+
             // Weather icon from network, fallback to icon if error
             final icon = Image.network(
               weather.iconUrl,
@@ -114,11 +133,55 @@ class WeatherCard extends StatelessWidget {
     );
   }
 
-  // Helper to get month name from month number
-  String _getMonthName(int month) =>
-      ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1];
+  String _getMonthName(BuildContext context, int month) {
+    switch (month) {
+      case 1:
+        return AppLocalizations.of(context)!.jan;
+      case 2:
+        return AppLocalizations.of(context)!.feb;
+      case 3:
+        return AppLocalizations.of(context)!.mar;
+      case 4:
+        return AppLocalizations.of(context)!.apr;
+      case 5:
+        return AppLocalizations.of(context)!.may;
+      case 6:
+        return AppLocalizations.of(context)!.jun;
+      case 7:
+        return AppLocalizations.of(context)!.jul;
+      case 8:
+        return AppLocalizations.of(context)!.aug;
+      case 9:
+        return AppLocalizations.of(context)!.sep;
+      case 10:
+        return AppLocalizations.of(context)!.oct;
+      case 11:
+        return AppLocalizations.of(context)!.nov;
+      case 12:
+        return AppLocalizations.of(context)!.dec;
+      default:
+        return '';
+    }
+  }
 
-  // Helper to get weekday name from weekday number
-  String _getWeekdayName(int day) =>
-      ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][day - 1];
+  String _getWeekdayName(BuildContext context, int day) {
+    switch (day) {
+      case 1:
+        return AppLocalizations.of(context)!.monday;
+      case 2:
+        return AppLocalizations.of(context)!.tuesday;
+      case 3:
+        return AppLocalizations.of(context)!.wednesday;
+      case 4:
+        return AppLocalizations.of(context)!.thursday;
+      case 5:
+        return AppLocalizations.of(context)!.friday;
+      case 6:
+        return AppLocalizations.of(context)!.saturday;
+      case 7:
+        return AppLocalizations.of(context)!.sunday;
+      default:
+        return '';
+    }
+  }
 }

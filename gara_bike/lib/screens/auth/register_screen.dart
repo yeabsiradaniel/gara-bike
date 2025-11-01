@@ -17,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/providers/auth_provider.dart';
 import 'package:gara_bike/screens/auth/otp_screen.dart';
 import 'package:gara_bike/widgets/custom_text_field.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// Screen for user registration, including form validation and navigation to OTP.
@@ -73,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
       } else {
         // Show error message if registration failed.
-        String errorMessage = 'Registration failed. Please try again.';
+        String errorMessage = AppLocalizations.of(context)!.registrationFailedPleaseTryAgain;
         if (response['error'] != null && response['error'] is Map) {
           final errors = response['error'] as Map<String, dynamic>;
           errorMessage = errors.entries
@@ -108,7 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // Main UI: registration form with validation and loading state.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.signUp, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -121,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               // Title
               Text(
-                'Create Your Account',
+                AppLocalizations.of(context)!.createYourAccount,
                 style: GoogleFonts.poppins(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -130,34 +131,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
               const SizedBox(height: 8),
               // Subtitle
               Text(
-                'Join Gara Bike to start your journey.',
+                AppLocalizations.of(context)!.joinGaraBikeToStartYourJourney,
                 style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 32),
               // Username field
-              CustomTextField(controller: _usernameController, labelText: 'Username'),
+              CustomTextField(controller: _usernameController, labelText: AppLocalizations.of(context)!.username),
               const SizedBox(height: 24),
               // Email field
-              CustomTextField(controller: _emailController, labelText: 'Email Address', keyboardType: TextInputType.emailAddress),
+              CustomTextField(controller: _emailController, labelText: AppLocalizations.of(context)!.emailAddress, keyboardType: TextInputType.emailAddress),
               const SizedBox(height: 24),
               // Phone number field
-              CustomTextField(controller: _phoneController, labelText: 'Phone Number (e.g., +251...)' , keyboardType: TextInputType.phone),
+              CustomTextField(controller: _phoneController, labelText: AppLocalizations.of(context)!.phoneNumber , keyboardType: TextInputType.phone),
               const SizedBox(height: 24),
 
               // NID FAN number field with validation
               CustomTextField(
                 controller: _nidController,
-                labelText: 'NID FAN number',
+                labelText: AppLocalizations.of(context)!.nidFanNumber,
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'NID FAN number cannot be empty';
+                    return AppLocalizations.of(context)!.nidFanNumberCannotBeEmpty;
                   }
                   if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return 'Please enter only digits';
+                    return AppLocalizations.of(context)!.pleaseEnterOnlyDigits;
                   }
                   if (value.length != 16) {
-                    return 'NID FAN must be exactly 16 digits';
+                    return AppLocalizations.of(context)!.nidFanMustBeExactly16Digits;
                   }
                   return null;
                 },
@@ -165,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               const SizedBox(height: 24),
               // Password field
-              CustomTextField(controller: _passwordController, labelText: 'Password', obscureText: true),
+              CustomTextField(controller: _passwordController, labelText: AppLocalizations.of(context)!.password, obscureText: true),
               const SizedBox(height: 32),
               // Submit button or loading indicator
               _isLoading
@@ -180,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       child: Text(
-                        'Create Account',
+                        AppLocalizations.of(context)!.createAccount,
                         style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,

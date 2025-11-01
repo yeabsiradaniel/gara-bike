@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gara_bike/screens/auth/welcome_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 /// Model class representing the content for a single onboarding page.
 class OnboardingInfo {
@@ -53,27 +54,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   /// Index of the currently visible onboarding page.
   int _currentPage = 0;
 
-  /// List of onboarding pages to display.
-  /// Assumes you have PNG or JPG images for onboarding.
-  final List<OnboardingInfo> _pages = [
-    OnboardingInfo(
-      imageAsset: 'assets/images/onboarding_locate.png',
-      title: 'Locate',
-      description: 'Find bikes near you instantly. Use precise location tracking anytime, anywhere.',
-    ),
-    OnboardingInfo(
-      imageAsset: 'assets/images/onboarding_unlock.png',
-      title: 'Unlock',
-      description: 'Seamlessly unlock bikes with a tap. Fast, secure, and ready to ride when you are.',
-    ),
-    OnboardingInfo(
-      imageAsset: 'assets/images/onboarding_ride.png',
-      title: 'Ride',
-      description: 'Enjoy a smooth and eco-friendly ride to your destination.',
-    ),
-  ];
-
-
   /// Called when the onboarding page changes.
   void _onPageChanged(int page) {
     setState(() {
@@ -93,10 +73,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    final List<OnboardingInfo> _pages = [
+      OnboardingInfo(
+        imageAsset: 'assets/images/onboarding_locate.png',
+        title: AppLocalizations.of(context)!.locate,
+        description: AppLocalizations.of(context)!.findBikesNearYouInstantly,
+      ),
+      OnboardingInfo(
+        imageAsset: 'assets/images/onboarding_unlock.png',
+        title: AppLocalizations.of(context)!.unlock,
+        description: AppLocalizations.of(context)!.seamlesslyUnlockBikesWithATap,
+      ),
+      OnboardingInfo(
+        imageAsset: 'assets/images/onboarding_ride.png',
+        title: AppLocalizations.of(context)!.ride,
+        description: AppLocalizations.of(context)!.enjoyASmoothAndEcoFriendlyRide,
+      ),
+    ];
+
     // The onboarding UI consists of a PageView for the pages and controls for navigation.
     return Scaffold(
       body: SafeArea(
@@ -146,7 +142,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         TextButton(
                           onPressed: _completeOnboarding,
                           child: Text(
-                            'Skip',
+                            AppLocalizations.of(context)!.skip,
                             style: GoogleFonts.poppins(color: Colors.grey[600]),
                           ),
                         ),
@@ -171,7 +167,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                           ),
                           child: Text(
-                            _currentPage == _pages.length - 1 ? 'Get Started' : 'Next',
+                            _currentPage == _pages.length - 1 ? AppLocalizations.of(context)!.getStarted : AppLocalizations.of(context)!.next,
                             style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
                           ),
                         ),

@@ -27,6 +27,7 @@ import 'package:gara_bike/screens/search_screen.dart';
 import 'package:gara_bike/screens/reservation_screen.dart';
 import 'package:gara_bike/models/bike_model.dart';
 import 'package:gara_bike/screens/qr_scan_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 import '../providers/ride_provider.dart';
 import 'active_ride_screen.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not get location: e.toString()}')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.couldNotGetLocation(e.toString()))),
         );
       }
     }
@@ -144,16 +145,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Greeting and subtitle
-                  Text('Hello ${user?.capitalizedUsername ?? ''},', style: GoogleFonts.poppins(fontSize: 28, fontWeight: FontWeight.bold)),
-                  Text('Wanna take a ride today?', style: GoogleFonts.poppins(fontSize: 18, color: Colors.grey[600])),
+                  Text(AppLocalizations.of(context)!.hello(user?.capitalizedUsername ?? ''), style: GoogleFonts.poppins(fontSize: 28, fontWeight: FontWeight.bold)),
+                  Text(AppLocalizations.of(context)!.wannaTakeARide, style: GoogleFonts.poppins(fontSize: 18, color: Colors.grey[600])),
                   const SizedBox(height: 24),
                   // Weather card widget
                   const WeatherCard(),
                   const SizedBox(height: 32),
                   // Section header for bikes
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                    Text('Nearby Bikes', style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold)),
-                    TextButton(onPressed: () {}, child: Text('Browse Map >', style: GoogleFonts.poppins(color: Colors.amber[800]))),
+                    Text(AppLocalizations.of(context)!.nearbyBikes, style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold)),
+                    TextButton(onPressed: () {}, child: Text(AppLocalizations.of(context)!.browseMap, style: GoogleFonts.poppins(color: Colors.amber[800]))),
                   ]),
                   const SizedBox(height: 16),
                   // List of nearby bikes
@@ -196,10 +197,10 @@ class _HomeScreenState extends State<HomeScreen> {
           case BikeStatus.initial:
             return const Center(child: CircularProgressIndicator());
           case BikeStatus.error:
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return Center(child: Text("${AppLocalizations.of(context)!.error} ${provider.errorMessage!}"));
           case BikeStatus.loaded:
             if (provider.bikes.isEmpty) {
-              return const Center(child: Text('No bikes found nearby.'));
+              return Center(child: Text(AppLocalizations.of(context)!.noBikesFoundNearby));
             }
             return SizedBox(
               height: 280,
@@ -241,11 +242,11 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Bike #${bike.id} is reserved!',
+                AppLocalizations.of(context)!.bikeIsReserved(bike.id.toString()),
                 style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
               ),
             ),
-            Text('View', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.view, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
             const Icon(Icons.chevron_right, color: Colors.white),
           ],
         ),

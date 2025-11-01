@@ -15,6 +15,7 @@ import 'package:lottie/lottie.dart' hide Marker; // Import the Lottie package
 import 'package:latlong2/latlong.dart';
 import 'package:gara_bike/models/ride_model.dart';
 import 'package:gara_bike/main.dart';  // To navigate home
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class RideSummaryScreen extends StatefulWidget {
   // The completed ride to summarize
@@ -59,7 +60,7 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
 
   // Formats the ride duration as 'Xm Ys'
   String _formatRideDuration() {
-    if (widget.completedRide.endTime == null) return '0m 0s';
+    if (widget.completedRide.endTime == null) return AppLocalizations.of(context)!.zeroMinsZeroSecs;
     final duration = DateTime.parse(widget.completedRide.endTime!).difference(DateTime.parse(widget.completedRide.startTime));
     final minutes = duration.inMinutes.remainder(60);
     final seconds = duration.inSeconds.remainder(60);
@@ -69,7 +70,7 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
   // Formats the ride distance in kilometers
   String _formatDistance() {
     final distance = widget.completedRide.distanceMeters;
-    if (distance == null) return '0.00';
+    if (distance == null) return AppLocalizations.of(context)!.zeroPointZeroZero;
     return (distance / 1000).toStringAsFixed(2);
   }
 
@@ -129,7 +130,7 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
               children: [
                 // Title
                 Text(
-                  'Trip Completed!',
+                  AppLocalizations.of(context)!.tripCompleted,
                   style: GoogleFonts.poppins(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 24),
@@ -138,8 +139,8 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildStatItem('assets/animations/fare.json', 'ETB ${widget.completedRide.cost?.toStringAsFixed(2) ?? "0.00"}', 'Fare'),
-                    _buildStatItem('assets/animations/timer.json', _formatRideDuration(), 'Duration'),
+                    _buildStatItem('assets/animations/fare.json', AppLocalizations.of(context)!.etb + ' ' + (widget.completedRide.cost?.toStringAsFixed(2) ?? AppLocalizations.of(context)!.zeroPointZeroZero), AppLocalizations.of(context)!.fare),
+                    _buildStatItem('assets/animations/timer.json', _formatRideDuration(), AppLocalizations.of(context)!.duration),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -147,8 +148,8 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildStatItem('assets/animations/route.json', '${_formatDistance()} km', 'Distance'),
-                    _buildStatItem('assets/animations/calories.json', '${widget.completedRide.caloriesBurned ?? 0} kcal', 'Calories'),
+                    _buildStatItem('assets/animations/route.json', '${_formatDistance()} ' + AppLocalizations.of(context)!.km, AppLocalizations.of(context)!.distance),
+                    _buildStatItem('assets/animations/calories.json', '${widget.completedRide.caloriesBurned ?? AppLocalizations.of(context)!.zero} ' + AppLocalizations.of(context)!.kcal, AppLocalizations.of(context)!.calories),
                   ],
                 ),
 
@@ -168,7 +169,7 @@ class _RideSummaryScreenState extends State<RideSummaryScreen> {
                       backgroundColor: Colors.green[800],
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: Text('Done', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+                    child: Text(AppLocalizations.of(context)!.done, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white)),
                   ),
                 )
               ],

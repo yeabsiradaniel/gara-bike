@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class SetLocationScreen extends StatefulWidget {
   final LatLng initialCenter;
@@ -35,16 +36,16 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
     final locationName = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Name this Location', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.nameThisLocation, style: GoogleFonts.poppins()),
         content: TextField(
           controller: _nameController,
           autofocus: true,
-          decoration: const InputDecoration(hintText: 'e.g., Home, Office, Gym'),
+          decoration: InputDecoration(hintText: AppLocalizations.of(context)!.egHomeOfficeGym),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           ElevatedButton(
             onPressed: () {
@@ -52,7 +53,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                 Navigator.of(context).pop(_nameController.text);
               }
             },
-            child: const Text('Save'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -71,7 +72,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Set Location', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.setLocation, style: GoogleFonts.poppins()),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
       ),
@@ -106,7 +107,7 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
             right: 24,
             child: ElevatedButton.icon(
               icon: const Icon(Icons.check, color: Colors.white),
-              label: Text('Confirm Location', style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
+              label: Text(AppLocalizations.of(context)!.confirmLocation, style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
               onPressed: _confirmLocation,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green[700],

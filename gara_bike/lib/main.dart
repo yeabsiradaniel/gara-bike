@@ -17,12 +17,16 @@ import 'package:gara_bike/screens/auth/welcome_screen.dart';
 import 'package:gara_bike/providers/theme_provider.dart'; // Make sure ThemeProvider is imported
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:gara_bike/l10n/app_localizations.dart';
+import 'package:gara_bike/providers/language_provider.dart';
+
 // Entry point of the application
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => LanguageProvider()),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => WeatherProvider()),
         ChangeNotifierProxyProvider<AuthProvider, BikeProvider>(
@@ -66,32 +70,37 @@ class GaraBikeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
-        return MaterialApp(
-          title: 'Gara Bike',
-          themeMode: themeProvider.themeMode,
+        return Consumer<LanguageProvider>(
+          builder: (context, languageProvider, child) {
+            return MaterialApp(
+              title: 'Gara Bike',
+              themeMode: themeProvider.themeMode,
+              locale: languageProvider.appLocale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
           
-          // --- LIGHT THEME DEFINITION ---
-          theme: ThemeData(
-            primarySwatch: Colors.green,
-            scaffoldBackgroundColor: Colors.grey[50],
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            // FIX: Base the textTheme on ThemeData.light() instead of the context
-            textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.light),
-          ),
+              // --- LIGHT THEME DEFINITION ---
+              theme: ThemeData(
+                primarySwatch: Colors.green,
+                scaffoldBackgroundColor: Colors.grey[50],
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.light),
+              ),
 
-          // --- DARK THEME DEFINITION ---
-          darkTheme: ThemeData(
-            primarySwatch: Colors.green,
-            scaffoldBackgroundColor: const Color(0xFF121212),
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            // This was already correct, based on ThemeData.dark()
-            textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.dark),
-          ),
+              // --- DARK THEME DEFINITION ---
+              darkTheme: ThemeData(
+                primarySwatch: Colors.green,
+                scaffoldBackgroundColor: const Color(0xFF121212),
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green, brightness: Brightness.dark),
+              ),
 
-          home: const SplashScreen(),
-          debugShowCheckedModeBanner: false,
+              home: const SplashScreen(),
+              debugShowCheckedModeBanner: false,
+            );
+          },
         );
       },
     );

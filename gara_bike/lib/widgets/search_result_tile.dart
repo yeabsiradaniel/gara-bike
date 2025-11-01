@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/models/parking_zone_model.dart';
 import 'package:gara_bike/screens/parking_zone_map_screen.dart'; // Import the new screen
 
+import 'package:gara_bike/l10n/app_localizations.dart';
+
 class SearchResultTile extends StatelessWidget {
   // The parking zone to display in this tile
   final ParkingZone zone;
@@ -28,7 +30,7 @@ class SearchResultTile extends StatelessWidget {
       // Display the parking zone name
       title: Text(zone.name, style: GoogleFonts.poppins()),
       // Subtitle for context
-      subtitle: const Text('Parking Zone'),
+      subtitle: Text(AppLocalizations.of(context)!.parkingZone),
       // On tap, navigate to the map screen for this parking zone
       onTap: () {
         Navigator.push(

@@ -8,6 +8,7 @@ import 'package:gara_bike/providers/auth_provider.dart';
 import 'package:gara_bike/providers/support_provider.dart';
 import 'package:gara_bike/widgets/custom_text_field.dart';
 import 'package:gara_bike/models/support_ticket_model.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -39,16 +40,16 @@ class _SupportScreenState extends State<SupportScreen> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Support', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.support, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
         bottom: TabBar(
           controller: _tabController,
           labelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
           unselectedLabelStyle: GoogleFonts.poppins(),
-          tabs: const [
-            Tab(text: 'New Ticket'),
-            Tab(text: 'Ticket History'),
+          tabs: [
+            Tab(text: AppLocalizations.of(context)!.newTicket),
+            Tab(text: AppLocalizations.of(context)!.ticketHistory),
           ],
         ),
       ),
@@ -92,7 +93,7 @@ class _NewTicketFormState extends State<NewTicketForm> {
     if (mounted) {
       if (response['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Support ticket created successfully!'), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.supportTicketCreatedSuccessfully), backgroundColor: Colors.green),
         );
         _formKey.currentState?.reset();
         _subjectController.clear();
@@ -100,7 +101,7 @@ class _NewTicketFormState extends State<NewTicketForm> {
         widget.tabController.animateTo(1); // Switch to history tab
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?['detail'] ?? 'Failed to create ticket.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?['detail'] ?? AppLocalizations.of(context)!.failedToCreateTicket), backgroundColor: Colors.red),
         );
       }
     }
@@ -124,10 +125,10 @@ class _NewTicketFormState extends State<NewTicketForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Contact Us', style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.contactUs, style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(
-              'Your name and email are automatically included. Please describe your issue below.',
+              AppLocalizations.of(context)!.yourNameAndEmailAreAutomaticallyIncluded,
               style: GoogleFonts.poppins(color: Colors.grey[600]),
             ),
             const SizedBox(height: 16),
@@ -135,15 +136,15 @@ class _NewTicketFormState extends State<NewTicketForm> {
             const SizedBox(height: 8),
             _buildUserInfo(Icons.email_outlined, user?.email ?? '...'),
             const SizedBox(height: 32),
-            CustomTextField(controller: _subjectController, labelText: 'Subject'),
+            CustomTextField(controller: _subjectController, labelText: AppLocalizations.of(context)!.subject),
             const SizedBox(height: 24),
             CustomTextField(
               controller: _messageController,
-              labelText: 'Your Message',
+              labelText: AppLocalizations.of(context)!.yourMessage,
               keyboardType: TextInputType.multiline,
               validator: (value) {
-                if (value == null || value.isEmpty) return 'Message cannot be empty';
-                if (value.length < 10) return 'Please provide more details (at least 10 characters)';
+                if (value == null || value.isEmpty) return AppLocalizations.of(context)!.messageCannotBeEmpty;
+                if (value.length < 10) return AppLocalizations.of(context)!.pleaseProvideMoreDetails;
                 return null;
               },
             ),
@@ -157,7 +158,7 @@ class _NewTicketFormState extends State<NewTicketForm> {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: Text('Submit Ticket', style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
+                    child: Text(AppLocalizations.of(context)!.submitTicket, style: GoogleFonts.poppins(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600)),
                   ),
           ],
         ),
@@ -198,7 +199,7 @@ class TicketHistoryList extends StatelessWidget {
           return Center(child: Text('Error: ${provider.errorMessage}'));
         }
         if (provider.tickets.isEmpty) {
-          return const Center(child: Text('You have no support tickets.'));
+          return Center(child: Text(AppLocalizations.of(context)!.youHaveNoSupportTickets));
         }
 
         return RefreshIndicator(
@@ -215,7 +216,7 @@ class TicketHistoryList extends StatelessWidget {
                 child: ListTile(
                   title: Text(ticket.subject, style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
                   subtitle: Text(
-                    'Submitted: ${DateFormat.yMMMd().add_jm().format(ticket.createdAt)}',
+                    AppLocalizations.of(context)!.submitted(DateFormat.yMMMd().add_jm().format(ticket.createdAt)),
                     style: GoogleFonts.poppins(color: Colors.grey[600]),
                   ),
                   trailing: _buildStatusChip(ticket.status),
@@ -235,7 +236,7 @@ class TicketHistoryList extends StatelessWidget {
       case 'OPEN':
         color = Colors.blue;
         break;
-      case 'IN_PROGRESS':
+case 'IN_PROGRESS':
         color = Colors.orange;
         break;
       case 'CLOSED':

@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/models/bike_model.dart';
 import 'package:gara_bike/screens/reservation_screen.dart'; // Import the new reservation screen
 
+import 'package:gara_bike/l10n/app_localizations.dart';
+
 class BikeCard extends StatelessWidget {
   // The bike to display in this card
   final Bike bike;
@@ -23,12 +25,12 @@ class BikeCard extends StatelessWidget {
     String distanceText;
     if (bike.distance != null) {
       if (bike.distance! < 1000) {
-        distanceText = '${bike.distance!.round()} m away';
+        distanceText = AppLocalizations.of(context)!.metersAway(bike.distance!.round().toString());
       } else {
-        distanceText = '${(bike.distance! / 1000).toStringAsFixed(1)} km away';
+        distanceText = AppLocalizations.of(context)!.kmAway((bike.distance! / 1000).toStringAsFixed(1));
       }
     } else {
-      distanceText = 'Distance unknown';
+      distanceText = AppLocalizations.of(context)!.distanceUnknown;
     }
 
     return Container(
@@ -76,7 +78,7 @@ class BikeCard extends StatelessWidget {
                     children: [
                       // Bike ID
                       Text(
-                        'Bike #${bike.id}',
+                        AppLocalizations.of(context)!.bike(bike.id.toString()),
                         style: GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
@@ -96,7 +98,7 @@ class BikeCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            '${bike.batteryLevel}%',
+                            AppLocalizations.of(context)!.battery(bike.batteryLevel.toString()),
                             style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
                           ),
                         ],

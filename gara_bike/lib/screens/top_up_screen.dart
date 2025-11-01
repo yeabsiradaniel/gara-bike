@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/providers/wallet_provider.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class TopUpScreen extends StatefulWidget {
@@ -60,7 +61,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
     // Validate amount
     if (finalAmount <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid amount.'), backgroundColor: Colors.red),
+        SnackBar(content: Text(AppLocalizations.of(context)!.pleaseEnterAValidAmount), backgroundColor: Colors.red),
       );
       return;
     }
@@ -73,12 +74,12 @@ class _TopUpScreenState extends State<TopUpScreen> {
     if (mounted) {
       if (response['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Top-up successful!'), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.topUpSuccessful), backgroundColor: Colors.green),
         );
         Navigator.of(context).pop();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?.toString() ?? 'Top-up failed.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?.toString() ?? AppLocalizations.of(context)!.topUpFailed), backgroundColor: Colors.red),
         );
       }
     }
@@ -88,12 +89,12 @@ class _TopUpScreenState extends State<TopUpScreen> {
   // Returns the button text based on selected or custom amount
   String get _topUpButtonText {
     if (_selectedAmount != null) {
-      return 'Top Up ETB ${_selectedAmount!.toStringAsFixed(2)}';
+      return AppLocalizations.of(context)!.topUpEtb(_selectedAmount!.toStringAsFixed(2));
     }
     if (_customAmountController.text.isNotEmpty) {
-      return 'Top Up ETB ${_customAmountController.text}';
+      return AppLocalizations.of(context)!.topUpEtb(_customAmountController.text);
     }
-    return 'Top Up';
+    return AppLocalizations.of(context)!.topUp;
   }
 
   @override
@@ -101,7 +102,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
     return Scaffold(
       appBar: AppBar(
         // App bar with title
-        title: Text('Top Up Wallet', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.topUpWallet, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -111,7 +112,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Section: Select amount chips
-            Text('Select Amount', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.selectAmount, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             _buildAmountSelector(),
             const SizedBox(height: 24),
@@ -120,7 +121,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
               const Expanded(child: Divider()),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text('OR', style: GoogleFonts.poppins(color: Colors.grey[600])),
+                child: Text(AppLocalizations.of(context)!.or, style: GoogleFonts.poppins(color: Colors.grey[600])),
               ),
               const Expanded(child: Divider()),
             ]),
@@ -129,7 +130,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
             _buildCustomAmountField(),
             const SizedBox(height: 32),
             // Section: Payment method
-            Text('Select Payment Method', style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(AppLocalizations.of(context)!.selectPaymentMethod, style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
             // For simplicity, we are assuming one payment method for now.
             _buildPaymentMethodSelector('Telebirr', 'assets/images/telebirr_logo.png'),
@@ -161,7 +162,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
       children: amounts.map((amount) {
         final isSelected = _selectedAmount == amount;
         return ChoiceChip(
-          label: Text('ETB ${amount.toStringAsFixed(0)}', style: GoogleFonts.poppins(color: isSelected ? Colors.white : Colors.black87)),
+          label: Text(AppLocalizations.of(context)!.etb + ' ' + amount.toStringAsFixed(0), style: GoogleFonts.poppins(color: isSelected ? Colors.white : Colors.black87)),
           selected: isSelected,
           onSelected: (selected) {
             if (selected) {
@@ -187,8 +188,7 @@ class _TopUpScreenState extends State<TopUpScreen> {
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       style: GoogleFonts.poppins(fontSize: 18),
       decoration: InputDecoration(
-        prefixText: 'ETB ',
-        labelText: 'Enter Custom Amount',
+        prefixText: AppLocalizations.of(context)!.etb + ' ',
         labelStyle: GoogleFonts.poppins(),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(

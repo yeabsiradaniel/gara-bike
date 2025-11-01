@@ -13,6 +13,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:gara_bike/providers/ride_provider.dart';
 import 'package:gara_bike/screens/active_ride_screen.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class QRScanScreen extends StatefulWidget {
@@ -56,7 +58,7 @@ class _QRScanScreenState extends State<QRScanScreen> with SingleTickerProviderSt
         );
       } else {
         final error = response['error'];
-        String errorMessage = 'Failed to start ride.';
+        String errorMessage = AppLocalizations.of(context)!.failedToStartRide;
         if (error is Map && error.containsKey('detail')) {
             errorMessage = error['detail'];
         } else if (error != null) {
@@ -73,11 +75,11 @@ class _QRScanScreenState extends State<QRScanScreen> with SingleTickerProviderSt
     return showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('Error', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.error(message), style: GoogleFonts.poppins()),
         content: Text(message, style: GoogleFonts.poppins()),
         actions: <Widget>[
           TextButton(
-            child: Text('Try Again', style: GoogleFonts.poppins()),
+            child: Text(AppLocalizations.of(context)!.tryAgain, style: GoogleFonts.poppins()),
             onPressed: () => Navigator.of(ctx).pop(),
           ),
         ],
@@ -106,7 +108,7 @@ class _QRScanScreenState extends State<QRScanScreen> with SingleTickerProviderSt
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         // Transparent app bar
-        title: Text('Scan QR Code', style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text(AppLocalizations.of(context)!.scanQrCode, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -154,7 +156,7 @@ class _QRScanScreenState extends State<QRScanScreen> with SingleTickerProviderSt
           right: 0,
           child: Center(
             child: Text(
-              'Position the QR Code within the frame',
+              AppLocalizations.of(context)!.positionTheQrCodeWithinTheFrame,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 color: Colors.white.withOpacity(0.9),

@@ -23,6 +23,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart' hide Marker; // Hide Lottie's Marker
 import 'package:gara_bike/providers/ride_provider.dart';
 import 'package:gara_bike/models/parking_zone_model.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 import '../models/ride_model.dart';
 
@@ -70,7 +71,7 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to get initial location: $e")));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.failedToGetInitialLocation(e.toString()))));
         Navigator.of(context).pop();
         return;
       }
@@ -238,7 +239,7 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
               const SizedBox(height: 12),
               // Ride in progress title
               Text(
-                'Ride in Progress',
+                AppLocalizations.of(context)!.rideInProgress,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[800]),
               ),
@@ -249,9 +250,9 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildDashboardStat('assets/animations/timer.json', _formatDuration(_rideDuration), 'DURATION'),
-                      _buildDashboardStat('assets/animations/route.json', provider.distanceInKm, 'KM'),
-                      _buildDashboardStat('assets/animations/calories.json', provider.caloriesBurned.toStringAsFixed(0), 'KCAL'),
+                      _buildDashboardStat('assets/animations/timer.json', _formatDuration(_rideDuration), AppLocalizations.of(context)!.duration),
+                      _buildDashboardStat('assets/animations/route.json', provider.distanceInKm, AppLocalizations.of(context)!.km),
+                      _buildDashboardStat('assets/animations/calories.json', provider.caloriesBurned.toStringAsFixed(0), AppLocalizations.of(context)!.kcal),
                     ],
                   );
                 },
@@ -261,8 +262,8 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
               _buildInfoTile(
                 icon: Icons.pedal_bike,
                 iconColor: Colors.black87,
-                title: 'Currently Riding',
-                subtitle: 'Bike #${Provider.of<RideProvider>(context).activeRide?.bike.id ?? ''}',
+                title: AppLocalizations.of(context)!.currentlyRiding,
+                subtitle: AppLocalizations.of(context)!.bike(Provider.of<RideProvider>(context).activeRide?.bike.id.toString() ?? ''),
               ),
               // Info tile for closest parking zone
               Consumer<RideProvider>(
@@ -270,8 +271,8 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
                   return _buildInfoTile(
                     icon: Icons.local_parking_outlined,
                     iconColor: Colors.blueAccent,
-                    title: 'Closest Parking Zone',
-                    subtitle: provider.closestZone?.name ?? 'Searching...',
+                    title: AppLocalizations.of(context)!.closestParkingZone,
+                    subtitle: provider.closestZone?.name ?? AppLocalizations.of(context)!.searching,
                     trailing: provider.distanceToClosestZone != null ? '${provider.distanceToClosestZone!.round()}m' : '--',
                   );
                 },
@@ -283,7 +284,7 @@ class _ActiveRideScreenState extends State<ActiveRideScreen> with TickerProvider
                 child: ElevatedButton.icon(
                   onPressed: _endRide,
                   icon: const Icon(Icons.stop_circle_outlined, color: Colors.white),
-                  label: Text("End Ride", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
+                  label: Text(AppLocalizations.of(context)!.endRide, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red[600],
                     padding: const EdgeInsets.symmetric(vertical: 14),

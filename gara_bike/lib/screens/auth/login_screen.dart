@@ -16,6 +16,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/providers/auth_provider.dart';
 import 'package:gara_bike/screens/home_screen.dart'; // To navigate after login
 import 'package:gara_bike/widgets/custom_text_field.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 /// Screen for user login, including form validation and navigation to home.
@@ -64,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Show error message if login failed.
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response['error']['detail'] ?? 'Login failed. Please try again.'),
+            content: Text(response['error']?['detail'] ?? AppLocalizations.of(context)!.loginFailedPleaseTryAgain),
             backgroundColor: Colors.red,
           ),
         );
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // Main UI: login form with validation and loading state.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.logIn, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               // Title
               Text(
-                'Welcome Back!',
+                AppLocalizations.of(context)!.welcomeBack,
                 style: GoogleFonts.poppins(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -109,18 +110,18 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 8),
               // Subtitle
               Text(
-                'Log in to continue your journey.',
+                AppLocalizations.of(context)!.logInToContinueYourJourney,
                 style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 48),
               // Email field
               CustomTextField(
                 controller: _emailController,
-                labelText: 'Email Address',
+                labelText: AppLocalizations.of(context)!.emailAddress,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty || !value.contains('@')) {
-                    return 'Please enter a valid email';
+                    return AppLocalizations.of(context)!.pleaseEnterAValidEmail;
                   }
                   return null;
                 },
@@ -129,11 +130,11 @@ class _LoginScreenState extends State<LoginScreen> {
               // Password field
               CustomTextField(
                 controller: _passwordController,
-                labelText: 'Password',
+                labelText: AppLocalizations.of(context)!.password,
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Password cannot be empty';
+                    return AppLocalizations.of(context)!.passwordCannotBeEmpty;
                   }
                   return null;
                 },
@@ -152,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       child: Text(
-                        'Log In',
+                        AppLocalizations.of(context)!.logIn,
                         style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,

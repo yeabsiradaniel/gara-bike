@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gara_bike/providers/pass_provider.dart';
 import 'package:gara_bike/models/pass_model.dart';
+import 'package:gara_bike/l10n/app_localizations.dart';
 
 
 class PurchasePassScreen extends StatefulWidget {
@@ -39,12 +40,12 @@ class _PurchasePassScreenState extends State<PurchasePassScreen> {
     if (mounted) {
       if (response['success']) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Pass purchased successfully!'), backgroundColor: Colors.green),
+          SnackBar(content: Text(AppLocalizations.of(context)!.passPurchasedSuccessfully), backgroundColor: Colors.green),
         );
         Navigator.of(context).pop(); // Go back to the wallet screen
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['error']?.toString() ?? 'Purchase failed.'), backgroundColor: Colors.red),
+          SnackBar(content: Text(response['error']?.toString() ?? AppLocalizations.of(context)!.purchaseFailed), backgroundColor: Colors.red),
         );
       }
     }
@@ -56,7 +57,7 @@ class _PurchasePassScreenState extends State<PurchasePassScreen> {
     return Scaffold(
       appBar: AppBar(
         // App bar with title
-        title: Text('Buy a Pass', style: GoogleFonts.poppins()),
+        title: Text(AppLocalizations.of(context)!.buyAPass, style: GoogleFonts.poppins()),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -68,11 +69,11 @@ class _PurchasePassScreenState extends State<PurchasePassScreen> {
           }
           // Show error message if fetch fails
           if (provider.status == PassStatus.error) {
-            return Center(child: Text('Error: ${provider.errorMessage}'));
+            return Center(child: Text("${AppLocalizations.of(context)!.error} ${provider.errorMessage!}"));
           }
           // Show message if no passes are available
           if (provider.passes.isEmpty) {
-            return const Center(child: Text('No passes available at this time.'));
+            return Center(child: Text(AppLocalizations.of(context)!.noPassesAvailableAtThisTime));
           }
 
           // List of available passes
@@ -105,18 +106,18 @@ class _PurchasePassScreenState extends State<PurchasePassScreen> {
             Text(pass.name, style: GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             // Pass duration
-            Text('${pass.durationDays} day(s) of unlimited rides', style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700])),
+            Text(AppLocalizations.of(context)!.daysOfUnlimitedRides(pass.durationDays), style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700])),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Pass price
-                Text('ETB ${pass.price.toStringAsFixed(2)}', style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.green[900])),
+                Text(AppLocalizations.of(context)!.etb + ' ' + pass.price.toStringAsFixed(2), style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.green[900])),
                 // Purchase button
                 ElevatedButton(
                   onPressed: () => _purchasePass(pass.id),
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700]),
-                  child: Text('Purchase', style: GoogleFonts.poppins(color: Colors.white)),
+                  child: Text(AppLocalizations.of(context)!.purchase, style: GoogleFonts.poppins(color: Colors.white)),
                 ),
               ],
             ),

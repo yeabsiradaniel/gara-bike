@@ -9,6 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:gara_bike/l10n/app_localizations.dart';
+
 class CustomTextField extends StatelessWidget {
   // Controller for the text field input
   final TextEditingController controller;
@@ -39,7 +41,7 @@ class CustomTextField extends StatelessWidget {
       // Use provided validator or default to non-empty check
       validator: validator ?? (value) {
         if (value == null || value.isEmpty) {
-          return '$labelText cannot be empty';
+          return AppLocalizations.of(context)!.fieldCannotBeEmpty(labelText);
         }
         return null;
       },
