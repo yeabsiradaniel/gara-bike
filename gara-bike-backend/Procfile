@@ -1,0 +1,1 @@
+web: gunicorn garabike_project.wsgi --log-file -
