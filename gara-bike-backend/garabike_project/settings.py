@@ -17,7 +17,7 @@ SECRET_KEY = config('SECRET_KEY', 'django-insecure-fallback-key-for-development'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*'] # For development; be more restrictive in production
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # CORS Middleware must be placed as high as possible
     'corsheaders.middleware.CorsMiddleware',
@@ -69,14 +70,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'garabike_project.wsgi.application'
 
+import dj_database_url
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# Using SQLite for simplicity in this development setup
+# Use dj-database-url to parse the DATABASE_URL environment variable
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Replace this with your local development database URL if needed
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -98,6 +102,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -126,9 +133,6 @@ SIMPLE_JWT = {
 }
 
 # CORS Configuration - Allows our frontend to connect
-CORS_ALLOW_ALL_ORIGINS = True # For development only
+CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
 # In production, use:
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000", # React admin panel
-#     "http://127.0.0.1:3000",
-# ]
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://127.0.0.1:3000').split(',')
