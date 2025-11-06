@@ -1,0 +1,371 @@
+{
+  "corporateAccounts": [],
+  "users": [
+    {
+      "id": 1,
+      "email": "testuser2@example.com",
+      "username": "testuser",
+      "password": "$2b$10$T5RIe0kfLIyAW/OJzew9OunMAbBACQOM6ngJaQCf9O5B9jNB3J84S",
+      "phoneNumber": "1234567891",
+      "nid": "123456780",
+      "isVerified": false,
+      "isAdmin": false,
+      "referralCode": "cmhi59pld0001kvposu0tvy4q",
+      "corporateAccountId": null,
+      "totalDistanceMeters": "0",
+      "totalCaloriesBurned": 0,
+      "totalDurationMinutes": 0,
+      "homeAddressName": null,
+      "homeAddressLat": null,
+      "homeAddressLon": null,
+      "workAddressName": null,
+      "workAddressLat": null,
+      "workAddressLon": null,
+      "dateJoined": "2025-11-02T20:09:12.144Z"
+    },
+    {
+      "id": 2,
+      "email": "admin@example.com",
+      "username": "adminuser",
+      "password": "$2b$10$GUe0ZcEC.wrJLGvMqHqtzOMWEpNvk.3cTTY8H47hvp5Q3IsIpKdxu",
+      "phoneNumber": "0987654321",
+      "nid": "987654321",
+      "isVerified": true,
+      "isAdmin": true,
+      "referralCode": "cmhi5fg9y0003kvpoqvevzv23",
+      "corporateAccountId": null,
+      "totalDistanceMeters": "0",
+      "totalCaloriesBurned": 0,
+      "totalDurationMinutes": 0,
+      "homeAddressName": null,
+      "homeAddressLat": null,
+      "homeAddressLon": null,
+      "workAddressName": null,
+      "workAddressLat": null,
+      "workAddressLon": null,
+      "dateJoined": "2025-11-02T20:13:40.006Z"
+    }
+  ],
+  "parkingZones": [
+    {
+      "id": 1,
+      "name": "Meskel Square",
+      "latitude": "9.010674",
+      "longitude": "38.762667",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "name": "Dembel",
+      "latitude": "9.004777",
+      "longitude": "38.767622",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "Welo Sefer",
+      "latitude": "8.993876",
+      "longitude": "38.774313",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "name": "Japan  | Bole",
+      "latitude": "8.991724",
+      "longitude": "38.781781",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "name": "Millennium Hall",
+      "latitude": "8.990126",
+      "longitude": "38.785303",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 6,
+      "name": "Skylight",
+      "latitude": "8.987744",
+      "longitude": "38.790828",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "name": "Hayat Hospital | Bole",
+      "latitude": "8.994489",
+      "longitude": "38.795523",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "name": "Imperial, Bole Road",
+      "latitude": "9.002289",
+      "longitude": "38.79989",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 9,
+      "name": "Gerji Road",
+      "latitude": "9.008395",
+      "longitude": "38.80358",
+      "radius": 30,
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "name": "Megenagna",
+      "latitude": "9.019154",
+      "longitude": "38.801313",
+      "radius": 30,
+      "isActive": true
+    }
+  ],
+  "bikes": [
+    {
+      "id": 1,
+      "qrCode": "a1b2c3d4-0001-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.01075",
+      "longitude": "38.76259",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.297Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 2,
+      "qrCode": "a1b2c3d4-0002-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.01059",
+      "longitude": "38.76278",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.312Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 3,
+      "qrCode": "a1b2c3d4-0003-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00482",
+      "longitude": "38.76771",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.321Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 4,
+      "qrCode": "a1b2c3d4-0004-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00469",
+      "longitude": "38.76755",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.327Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 5,
+      "qrCode": "a1b2c3d4-0005-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99399",
+      "longitude": "38.77421",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.336Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 6,
+      "qrCode": "a1b2c3d4-0006-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99375",
+      "longitude": "38.77443",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.344Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 7,
+      "qrCode": "a1b2c3d4-0007-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99181",
+      "longitude": "38.78188",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.350Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 8,
+      "qrCode": "a1b2c3d4-0008-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99163",
+      "longitude": "38.78168",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.360Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 9,
+      "qrCode": "a1b2c3d4-0009-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.9902",
+      "longitude": "38.7852",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.368Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 10,
+      "qrCode": "a1b2c3d4-0010-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99005",
+      "longitude": "38.78545",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.374Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 11,
+      "qrCode": "a1b2c3d4-0011-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.98782",
+      "longitude": "38.79075",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.383Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 12,
+      "qrCode": "a1b2c3d4-0012-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.98766",
+      "longitude": "38.79099",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.389Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 13,
+      "qrCode": "a1b2c3d4-0013-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99455",
+      "longitude": "38.79544",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.395Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 14,
+      "qrCode": "a1b2c3d4-0014-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "8.99439",
+      "longitude": "38.79568",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.408Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 15,
+      "qrCode": "a1b2c3d4-0015-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00235",
+      "longitude": "38.79975",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.416Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 16,
+      "qrCode": "a1b2c3d4-0016-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00219",
+      "longitude": "38.8",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.424Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 17,
+      "qrCode": "a1b2c3d4-0017-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00848",
+      "longitude": "38.80345",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.432Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 18,
+      "qrCode": "a1b2c3d4-0018-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.00828",
+      "longitude": "38.8037",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.442Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 19,
+      "qrCode": "a1b2c3d4-0019-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.01925",
+      "longitude": "38.8012",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.451Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    },
+    {
+      "id": 20,
+      "qrCode": "a1b2c3d4-0020-4a1a-a1a1-a1b2c3d4e5f6",
+      "status": "AVAILABLE",
+      "latitude": "9.01905",
+      "longitude": "38.80145",
+      "batteryLevel": 100,
+      "lastReportedAt": "2025-11-02T19:55:35.460Z",
+      "reservedById": null,
+      "reservationExpiresAt": null
+    }
+  ],
+  "rides": [],
+  "wallets": [
+    {
+      "id": 1,
+      "userId": 1,
+      "balance": "0"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "balance": "0"
+    }
+  ],
+  "transactions": [],
+  "supportTickets": [],
+  "passes": [],
+  "userPasses": [],
+  "bikeReports": []
+}

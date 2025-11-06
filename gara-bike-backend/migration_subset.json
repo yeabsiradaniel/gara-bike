@@ -1,0 +1,196 @@
+{
+    "bikes": [
+        {
+            "id": 1,
+            "qr_code": "c3eddeaa-f2bc-4c30-8088-9e1aae291c00",
+            "status": "AVAILABLE",
+            "latitude": "8.987634",
+            "longitude": "38.790801",
+            "battery_level": 95,
+            "last_reported_at": "2025-07-02T13:53:51.326Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 2,
+            "qr_code": "3d33a572-7adb-4545-9b8b-0bd9140b4b16",
+            "status": "AVAILABLE",
+            "latitude": "8.987657",
+            "longitude": "38.790778",
+            "battery_level": 95,
+            "last_reported_at": "2025-11-01T20:32:10.861Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 3,
+            "qr_code": "8094d5d9-01cd-4fa8-8427-4f03525d4bcd",
+            "status": "AVAILABLE",
+            "latitude": "8.987778",
+            "longitude": "38.790855",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-04T20:09:43.025Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 4,
+            "qr_code": "563387e1-36a2-49b5-9a15-534159a57b10",
+            "status": "AVAILABLE",
+            "latitude": "9.004690",
+            "longitude": "38.767550",
+            "battery_level": 100,
+            "last_reported_at": "2025-06-21T18:00:43.182Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 5,
+            "qr_code": "0a3abd1c-469d-4ad8-83ca-fd0f190e59b8",
+            "status": "AVAILABLE",
+            "latitude": "8.987659",
+            "longitude": "38.790722",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-03T21:18:33.694Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 6,
+            "qr_code": "8fc5e9b5-6a6a-42a4-8626-544f93b2620a",
+            "status": "AVAILABLE",
+            "latitude": "8.987657",
+            "longitude": "38.790778",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-08T14:30:28.433Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 7,
+            "qr_code": "31ddeedf-747c-442a-8bfd-ad2f583d2ec5",
+            "status": "AVAILABLE",
+            "latitude": "8.987657",
+            "longitude": "38.790778",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-02T17:37:33.310Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 8,
+            "qr_code": "b1abba9c-e865-43e5-ba61-9c3002b013a2",
+            "status": "AVAILABLE",
+            "latitude": "8.987651",
+            "longitude": "38.790701",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-03T20:39:23.941Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 9,
+            "qr_code": "0cb67410-4f02-4eec-870e-6c32bf57371b",
+            "status": "AVAILABLE",
+            "latitude": "8.987789",
+            "longitude": "38.790801",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-02T22:15:42.720Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        },
+        {
+            "id": 10,
+            "qr_code": "b8902e4a-c97a-4141-92f7-250d7cf51100",
+            "status": "AVAILABLE",
+            "latitude": "8.987657",
+            "longitude": "38.790778",
+            "battery_level": 100,
+            "last_reported_at": "2025-07-04T10:00:55.031Z",
+            "reserved_by_id": null,
+            "reservation_expires_at": null
+        }
+    ],
+    "parking_zones": [
+        {
+            "id": 1,
+            "name": "Meskel Square",
+            "latitude": "9.010674",
+            "longitude": "38.762667",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 2,
+            "name": "Dembel",
+            "latitude": "9.004777",
+            "longitude": "38.767622",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 3,
+            "name": "Welo Sefer",
+            "latitude": "8.993876",
+            "longitude": "38.774313",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 4,
+            "name": "Japan  | Bole",
+            "latitude": "8.991724",
+            "longitude": "38.781781",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 5,
+            "name": "Millennium Hall",
+            "latitude": "8.990126",
+            "longitude": "38.785303",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 6,
+            "name": "Skylight",
+            "latitude": "8.987744",
+            "longitude": "38.790828",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 7,
+            "name": "Hayat Hospital | Bole",
+            "latitude": "8.994489",
+            "longitude": "38.795523",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 8,
+            "name": "Imperial, Bole Road",
+            "latitude": "9.002289",
+            "longitude": "38.799890",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 9,
+            "name": "Gerji Road",
+            "latitude": "9.008395",
+            "longitude": "38.803580",
+            "radius": 30,
+            "is_active": true
+        },
+        {
+            "id": 10,
+            "name": "Megenagna",
+            "latitude": "9.019154",
+            "longitude": "38.801313",
+            "radius": 30,
+            "is_active": true
+        }
+    ]
+}
